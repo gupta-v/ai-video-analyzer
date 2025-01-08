@@ -166,7 +166,7 @@ check_session_timeout()
 
 # Main UI Components
 video_file = st.file_uploader(
-    "Upload a video file to summarize",
+    "Upload a video file to Analyse",
     type=["mp4", "mov", "avi", "mkv"],
 )
 
