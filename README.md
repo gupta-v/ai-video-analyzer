@@ -1,6 +1,6 @@
-# AI Video Summarizer & Chat Agent
+# AI Video Analyzer & Chat Agent
 
-This project is an advanced **AI Video Summarizer and Chat Agent** built using **Streamlit** and **Phidata**, powered by **Gemini 1.5 Flash** and **DuckDuckGo**. It provides an interactive platform for users to analyze videos, get AI-powered insights, and perform web searches all in one interface.
+This project is an advanced **AI Video Analyzer and Chat Agent** built using **Streamlit** and **Phidata**, powered by **Gemini 1.5 Flash** and **DuckDuckGo**. It provides an interactive platform for users to analyze videos, get AI-powered insights, and perform web searches all in one interface.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ This project is an advanced **AI Video Summarizer and Chat Agent** built using *
 
 ## Project Overview
 
-The **AI Video Summarizer & Chat Agent** is a powerful web application that combines video analysis capabilities with natural language processing and web search functionality. It uses Phidata's Agent framework to integrate Google's Gemini 1.5 Flash model for video understanding and DuckDuckGo for supplementary web searches, providing users with comprehensive insights and information about their uploaded videos.
+The **AI Video Analyzer & Chat Agent** is a powerful web application that combines video analysis capabilities with natural language processing and web search functionality. It uses Phidata's Agent framework to integrate Google's Gemini 1.5 Flash model for video understanding and DuckDuckGo for supplementary web searches, providing users with comprehensive insights and information about their uploaded videos.
 
 ## Features
 
@@ -33,7 +33,7 @@ The **AI Video Summarizer & Chat Agent** is a powerful web application that comb
 
 ## Uses and Scope
 
-The AI Video Summarizer & Chat Agent serves multiple purposes across different domains:
+The AI Video Analyzer & Chat Agent serves multiple purposes across different domains:
 
 - **Content Analysis**: Quickly understand and extract insights from video content
 - **Research & Education**: Analyze educational videos and gather supplementary information
