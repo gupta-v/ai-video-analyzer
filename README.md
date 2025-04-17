@@ -1,6 +1,6 @@
 # AI Video Analyzer & Chat Agent
 
-This project is an advanced **AI Video Analyzer and Chat Agent** built using **Streamlit** and **Phidata**, powered by **Gemini 1.5 Flash** and **DuckDuckGo**. It provides an interactive platform for users to analyze videos, get AI-powered insights, and perform web searches all in one interface.
+This project is an advanced **AI Video Analyzer and Chat Agent** built using **Streamlit**, powered by **Google's Gemini 1.5 Flash** and **LangChain's DuckDuckGo integration**. It provides an interactive platform for users to analyze videos, get AI-powered insights, and perform web searches all in one interface.
 
 ## Table of Contents
 
@@ -17,15 +17,15 @@ This project is an advanced **AI Video Analyzer and Chat Agent** built using **S
 
 ## Project Overview
 
-The **AI Video Analyzer & Chat Agent** is a powerful web application that combines video analysis capabilities with natural language processing and web search functionality. It uses Phidata's Agent framework to integrate Google's Gemini 1.5 Flash model for video understanding and DuckDuckGo for supplementary web searches, providing users with comprehensive insights and information about their uploaded videos.
+The **AI Video Analyzer & Chat Agent** is a powerful web application that combines video analysis capabilities with natural language processing and web search functionality. It uses Agno's Agent framework to integrate Google's Gemini 1.5 Flash model for video understanding and LangChain's DuckDuckGoSearchRun tool for supplementary web searches, providing users with comprehensive insights and information about their uploaded videos.
 
 ## Features
 
-- **AI Agent Architecture**: Built using Phidata's Agent framework for seamless AI integration
+- **AI Agent Architecture**: Built using Agno's Agent framework for seamless AI integration
 - **Video Upload & Processing**: Support for multiple video formats (MP4, MOV, AVI, MKV)
 - **AI-Powered Analysis**: Video content analysis using Gemini 1.5 Flash
 - **Interactive Chat Interface**: Real-time conversation with the AI about video content
-- **Web Search Integration**: Supplementary information from DuckDuckGo search
+- **LangChain Tools Integration**: Web search functionality using LangChain's DuckDuckGoSearchRun tool
 - **Session Management**: Automatic timeout after 1 hour of inactivity
 - **Responsive UI**: Clean and intuitive user interface with auto-scrolling chat
 - **Multi-Modal Analysis**: Combines video understanding with text-based responses
@@ -40,11 +40,12 @@ The AI Video Analyzer & Chat Agent serves multiple purposes across different dom
 - **Content Creation**: Help content creators understand and improve their videos
 - **Information Synthesis**: Combine video analysis with web search results for comprehensive understanding
 - **Interactive Learning**: Engage with video content through natural language conversations
-- **Agent-Based Processing**: Utilize Phidata's Agent framework for complex task handling
+- **Multi-Modal Processing**: Utilize Gemini 1.5 Flash for advanced video understanding
+- **Tool-Augmented Search**: Leverage LangChain tools for enhanced web search capabilities
 
 ## File Structure
 
-```plaintext
+```sh
 ai-video-analyzer
 │
 ├── app.py                 # Main application
@@ -58,10 +59,11 @@ ai-video-analyzer
 
 1. [GitHub Account](https://github.com/)
 2. [Google AI Studio Account](https://aistudio.google.com/)
-3. [Python 3.7+](https://www.python.org/downloads/)
+3. [Python 3.10+](https://www.python.org/downloads/)
 4. [VSCode IDE](https://code.visualstudio.com/)
 5. [Git CLI](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line)
-6. [Phidata](https://docs.phidata.com/)
+6. [Agno](https://docs.agno.com/)
+7. [LangChain Tools](https://python.langchain.com/docs/integrations/tools/)
 
 ## Getting Started
 
@@ -70,40 +72,51 @@ ai-video-analyzer
 - Python 3.7 or higher
 - pip (Python package manager)
 - Google AI Studio API key
-- Phidata API key
+- Agno API key
 
 ### Installation
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/gupta-v/ai-video-analyzer.git
+   git clone https://github.com/yourusername/ai-video-analyzer.git
    cd ai-video-analyzer
    ```
 
-2. Install required packages:
+2. Create an Virtual Environment
+
+   ```sh
+   python -m venv venv
+   ```
+
+   - Activate the Virtual Environment
+     ```sh
+     venv/Scripts/Activate       # on windows
+     source venv/bin/activate    # on mac
+     ```
+
+3. Install required packages:
 
    ```sh
    pip install -r requirements.txt
    ```
 
-3. Set up environment variables:
+4. Set up environment variables:
 
    ```sh
    cp .env.example .env
    ```
 
-Edit the `.env` file and add your API keys:
+5. Edit the `.env` file and add your API keys:
 
-    ```
-    GOOGLE_API_KEY="your_google_api_key_here"
-    PHI_API_KEY="your_phidata_api_key_here"
-    ```
+   ```sh
+   GOOGLE_API_KEY="your_google_api_key_here"
+   AGNO_API_KEY="your_agno_api_key_here"
+   ```
 
-You'll need to:
-
-- Get a Google API key from [Google AI Studio](https://aistudio.google.com/)
-- Get a Phidata API key from [Phidata](https://docs.phidata.com/)
+   - You'll need to:
+     - Get a Google API key from [Google AI Studio](https://aistudio.google.com/)
+     - Get an Agno API key from [Agno](https://app.agno.com/)
 
 ## Usage
 
@@ -123,37 +136,31 @@ streamlit run app.py
 
    - Ask Questions:
 
-     - Use the app to ask questions about the video content. The AI analyzes the video using PhiData and provides insightful answers, powered by Gemini 1.5.
-
-     - e.g `What is the Main theme of the video?`
+     - Use the app to ask questions about the video content. The AI analyzes the video using Gemini 1.5 Flash and provides insightful answers.
+     - e.g `What is the main theme of the video?`
 
    - Request Summaries & Analysis:
 
      - Get summaries, key points, or detailed breakdowns of the video content for better understanding.
-
      - e.g `Analyze the video and use key points to describe the detailed breakdown of the video content`
 
    - Search for Additional Information:
 
-     - Use the integrated DuckDuckGo web search through PhiData to find related information or expand on the video's topic.
-
-     - e.g `Summarize the video,use web search for the given information and authenticate it.`
+     - Use the integrated LangChain DuckDuckGoSearchRun tool to find related information or expand on the video's topic.
+     - e.g `Summarize the video, use web search for the given information and authenticate it.`
 
    - Direct Web Search:
-
-     - Alternatively, perform a direct web search for your query using the `Web Search 🔍` feature.
-
-     - e.g `What is Phidata?` (Let's say the video was about phidata, so u can directly web search for it in the same application and get results and links to the website.)
+     - Alternatively, perform a direct web search for your query using the `Web Search 🔍` feature, powered by LangChain's search tools.
+     - e.g `What is Agno?` (Let's say the video was about Agno, so you can directly web search for it in the same application and get results.)
 
 ### Agent Interaction
 
-The application uses Phidata's Agent framework to:
+The application uses:
 
-- Process and understand video content
-- Generate contextual responses
-- Perform web searches when needed
-- Maintain conversation coherence
-- Handle multi-modal inputs (video and text)
+- Agno's Agent framework with Gemini 1.5 Flash to process and understand video content
+- LangChain's DuckDuckGoSearchRun tool for web search capabilities
+- Streamlit for the interactive UI
+- Session state for maintaining conversation context
 
 ## Data Description
 
@@ -162,8 +169,8 @@ The application handles various types of data:
 - **Video Files**: Supports MP4, MOV, AVI, and MKV formats
 - **Chat History**: Stored in session state for the duration of the session
 - **Processed Video Data**: Temporarily stored during analysis
-- **Web Search Results**: Retrieved from DuckDuckGo in real-time
-- **Agent State**: Managed by Phidata's framework
+- **Web Search Results**: Retrieved via LangChain's DuckDuckGoSearchRun tool in real-time
+- **Agent State**: Managed by Agno's framework
 
 ## Future Enhancements
 
@@ -188,14 +195,14 @@ The application handles various types of data:
 4. **Additional Features**:
    - Multiple video comparison
    - Collaborative analysis sessions
-   - Integration with more search engines
+   - Integration with additional LangChain tools (e.g., document loaders, memory modules)
    - Custom model fine-tuning options
-   - Advanced agent capabilities using Phidata
+   - Advanced LangChain-powered retrieval and search capabilities
 
 ## Acknowledgments
 
 - Powered by Google's Gemini 1.5 Flash model
-- Built with Phidata's Agent framework
-- Uses DuckDuckGo for web search capabilities
+- Built with Agno's Agent framework
+- Uses LangChain's DuckDuckGoSearchRun tool for web search capabilities
 - Built with Streamlit's powerful web framework
 - Inspired by the need for intelligent video analysis tools

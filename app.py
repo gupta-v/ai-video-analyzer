@@ -1,14 +1,19 @@
-import streamlit as st
-from phi.agent import Agent
-from phi.model.google import Gemini
-from phi.tools.duckduckgo import DuckDuckGo
-import google.generativeai as genai
-from google.generativeai import upload_file, get_file
-from duckduckgo_search import DDGS
+import os
 import time
 import tempfile
+
+import streamlit as st
+
+from agno.agent import Agent
+from agno.models.google import Gemini
+from agno.tools.duckduckgo import DuckDuckGoTools
+
+import google.generativeai as genai
+from google.generativeai import upload_file, get_file
+
+from langchain_community.tools import DuckDuckGoSearchRun
+
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -75,9 +80,9 @@ initialize_session_state()
 def initialize_agent():
     """Initialize the AI agent with Gemini model and DuckDuckGo tool"""
     return Agent(
-        name="Video AI Chat Agent with Web Search",
+        name="Video Analyzer & AI Chat Agent with Web Search",
         model=Gemini(id="gemini-1.5-flash"),
-        tools=[DuckDuckGo()],
+        tools=[DuckDuckGoTools()],
         markdown=True,
     )
 
@@ -136,7 +141,11 @@ def generate_response(query):
     """Generate AI response using video content and external knowledge"""
     try:
         prompt = f"Use the uploaded video content and external knowledge to answer the question: {query}"
-        response = multimodal_Agent.run(prompt, videos=[st.session_state.processed_video_file])
+        response = multimodal_Agent.run(
+                                         prompt,
+                                         videos=[{"filepath": st.session_state.processed_video_file.name}]
+                                        )
+
         ai_response = response.content
 
         if not ai_response or len(ai_response.strip()) < 50:
@@ -145,16 +154,24 @@ def generate_response(query):
     except Exception as e:
         return f"An error occurred: {e}"
 
+
+
 def perform_web_search(query):
-    """Perform web search using DuckDuckGo"""
+    """Perform web search using Agno's DuckDuckGoTools"""
     try:
         with st.spinner("Searching the web..."):
-            with DDGS() as ddgs:
-                search_results = ddgs.text(query, max_results=3)
-                results = "Here's what I found online:\n\n"
-                for result in search_results:
-                    results += f"- **{result['title']}**: {result['body'][:200]}...\n[Read More]({result['href']})\n\n"
-                return results
+            search = DuckDuckGoSearchRun()
+            # Form search query with better context
+            search_prompt = f"Search for information about: {query}"
+            
+            # Run the search via the agent
+            response = search.invoke(search_prompt)
+            
+            # Extract and format the response
+            if response:
+                return response
+            else:
+                return f"No relevant results found for '{query}'. Try asking in a different way."
     except Exception as e:
         return f"Search error: {e}"
 
